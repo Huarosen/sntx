@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/main.css">
-    <title>闪暖历史头像查看</title>
+    <title>闪暖历史头像查看CN</title>
 </head>
 <body>
 <div class="container-fluid" id="main">
@@ -23,7 +23,10 @@
         <div class="navbar-collapse collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="./index.html">历史头像查看</a>
+                    <a class="nav-link" href="./index.html">历史头像查看CN</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./tw.html">历史头像查看TW</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="./about.html">关于本站</a>
@@ -79,7 +82,8 @@
             "url": "./image",
             "type": "POST",
             "data": {
-                "uid": uid
+                "uid": uid,
+                "type": "cn"
             },
             "dataType": "json",
             "success": function (data) {

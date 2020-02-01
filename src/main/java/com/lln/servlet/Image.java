@@ -35,12 +35,16 @@ public class Image extends HttpServlet {
         response.setContentType("text/html;charset=utf-8");
         PrintWriter writer = response.getWriter();
         String uid = request.getParameter("uid");
+        String type = request.getParameter("type");
         if (uid == null || uid.length() == 0) {
             writer.println(CommonUtils.message(-1, "无id"));
             return;
         }
+        if (type == null) {
+            type = "cn";
+        }
         try {
-            ArrayList<String> images = userImageService.getUserImage(uid);
+            ArrayList<String> images = "cn".equals(type) ? userImageService.getUserImage(uid) : userImageService.getUserImageTw(uid);
             if (images.size() == 0) {
                 writer.println(CommonUtils.message(0, "未获取到头像"));
                 return;
@@ -52,7 +56,7 @@ public class Image extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         doPost(request, response);
     }
 }
