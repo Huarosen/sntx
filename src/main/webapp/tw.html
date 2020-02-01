@@ -43,11 +43,9 @@
                        aria-label="请输入用户编号">
             </div>
             <div class="text-center mt-3 mb-3">
-                <button id="submit" class="btn btn-primary form-control" onclick="search()">查询</button>
+                <button id="submit" class="btn btn-primary form-control" onclick="search('tw')">查询</button>
             </div>
-            <div id="show" class="text-center">
-
-            </div>
+            <div id="show" class="text-center"></div>
         </div>
     </div>
 </div>
@@ -62,71 +60,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
-<script type="text/javascript">
-    var searching = false;
-
-    function search() {
-        var uid = $("#uid").val();
-        if (uid === "") {
-            alert("请输入用户编号");
-            return;
-        }
-        if (searching) {
-            alert("正在查询，请稍候");
-            return;
-        }
-        searching = true;
-        operateOk(false);
-        $.ajax({
-            "url": "./image",
-            "type": "POST",
-            "data": {
-                "uid": uid,
-                "type": "tw"
-            },
-            "dataType": "json",
-            "success": function (data) {
-                searching = false;
-                operateOk(true);
-                if (data['status'] === 1) {
-                    show(data['data']);
-                    return;
-                }
-                alert(data ['message']);
-                $("#show").html("");
-            },
-            "error": function () {
-                alert("数据获取失败，请重试！");
-                $("#show").html("");
-                searching = false;
-                operateOk(true);
-            }
-        })
-    }
-
-
-    function show(data) {
-        var show = $("#show");
-        show.html("");
-        for (var i = 0; i < data.length; i++) {
-            var u = data[i];
-            var img = $('<img src="' + u + '" alt="头像" width="45%"/>');
-            show.append(img);
-        }
-    }
-
-
-    function operateOk(flag) {
-        var submit = $("#submit");
-        if (flag) {
-            submit.removeAttr("disabled");
-            submit.html("查询")
-        } else {
-            submit.attr("disabled", "disabled");
-            submit.html("查询中...")
-        }
-    }
-</script>
+<script type="text/javascript" src="./js/sntx.js"></script>
 </body>
 </html>
